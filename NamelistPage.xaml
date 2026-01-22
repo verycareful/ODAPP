@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ODapp.NamelistPage"
+             Title="Namelist">
+
+    <ContentPage.Content>
+        <Grid Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Text="Refresh" Clicked="OnRefreshNamelistClicked" Grid.Row="0" />
+
+            <!-- Column Headers -->
+            <Grid Grid.Row="1" Padding="10" BackgroundColor="#f0f0f0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Grid.Column="0">
+                    <Label Text="STUDENT INFO" FontAttributes="Bold" FontSize="14" TextColor="#333333" />
+                </StackLayout>
+                <StackLayout Grid.Column="1">
+                    <Label Text="ADMISSION INFO" FontAttributes="Bold" FontSize="14" TextColor="#333333" />
+                </StackLayout>
+                <StackLayout Grid.Column="2">
+                    <Label Text="COURSE INFO" FontAttributes="Bold" FontSize="14" TextColor="#333333" />
+                </StackLayout>
+            </Grid>
+
+            <ListView x:Name="NamelistListView" ItemsSource="{Binding Namelist}" Grid.Row="2" 
+                      HasUnevenRows="True" SeparatorVisibility="Default" SeparatorColor="#e0e0e0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Grid.Column="0" Spacing="5">
+                                    <Label Text="{Binding RegisterNumber}" FontAttributes="Bold" TextColor="#0066cc" />
+                                    <Label Text="{Binding Name}" />
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="1" Spacing="5">
+                                    <Label Text="{Binding AdmissionYear, StringFormat='Year: {0}'}" />
+                                    <Label Text="{Binding Department}" />
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="2" Spacing="5">
+                                    <Label Text="{Binding Course}" />
+                                    <Label Text="{Binding Section, StringFormat='Section: {0}'}" />
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

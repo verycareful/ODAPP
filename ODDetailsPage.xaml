@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ODapp.ODDetailsPage"
+             Title="OD Details">
+
+    <ContentPage.Content>
+        <Grid Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Text="Refresh" Clicked="OnRefreshODDetailsClicked" Grid.Row="0" />
+
+            <!-- Column Headers -->
+            <Grid Grid.Row="1" Padding="10" BackgroundColor="#f0f0f0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="STUDENT &amp; DATE" Grid.Column="0" FontAttributes="Bold" FontSize="14" TextColor="#333333" />
+                <Label Text="TIME &amp; REASON" Grid.Column="1" FontAttributes="Bold" FontSize="14" TextColor="#333333" />
+            </Grid>
+
+            <ListView x:Name="ODDetailsListView" ItemsSource="{Binding ODDetails}" Grid.Row="2" 
+                      HasUnevenRows="True" SeparatorVisibility="Default" SeparatorColor="#e0e0e0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Margin="2" Padding="10" BorderColor="#e0e0e0" CornerRadius="5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackLayout Grid.Column="0" Spacing="8">
+                                        <Label Text="Register Number:" FontSize="Small" TextColor="#666666" />
+                                        <Label Text="{Binding RegisterNumber}" FontAttributes="Bold" FontSize="Medium" TextColor="#0066cc" />
+
+                                        <Label Text="Date:" FontSize="Small" TextColor="#666666" Margin="0,8,0,0" />
+                                        <Label Text="{Binding Date, StringFormat='{0:dddd, MMMM d, yyyy}'}" FontAttributes="Bold" />
+                                    </StackLayout>
+
+                                    <StackLayout Grid.Column="1" Spacing="8">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Time:" FontSize="Small" TextColor="#666666" VerticalOptions="Center" />
+                                            <Frame BackgroundColor="#e6f2ff" Padding="8,4" CornerRadius="4" BorderColor="Transparent" HorizontalOptions="Start">
+                                                <Label Text="{Binding From, StringFormat='From: {0}h'}" FontAttributes="Bold" TextColor="#0066cc" />
+                                            </Frame>
+                                            <Label Text="to" VerticalOptions="Center" Margin="5,0" />
+                                            <Frame BackgroundColor="#e6f2ff" Padding="8,4" CornerRadius="4" BorderColor="Transparent" HorizontalOptions="Start">
+                                                <Label Text="{Binding To, StringFormat='{0}h'}" FontAttributes="Bold" TextColor="#0066cc" />
+                                            </Frame>
+                                        </StackLayout>
+
+                                        <StackLayout Spacing="4" Margin="0,8,0,0">
+                                            <Label Text="Reason:" FontSize="Small" TextColor="#666666" />
+                                            <Label Text="{Binding Reason}" FontSize="Small" LineBreakMode="WordWrap" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

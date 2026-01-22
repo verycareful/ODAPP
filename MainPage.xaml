@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ODapp.MainPage">
+
+    <StackLayout Padding="10">
+        <Label Text="OD Management App" FontSize="Large" HorizontalOptions="Center" />
+
+        <Button x:Name="ShowNamelistButton" Text="Show Namelist" Clicked="OnShowNamelistClicked" />
+        <Button x:Name="ShowODDetailsButton" Text="Show OD Details" Clicked="OnShowODDetailsClicked" />
+        <Button x:Name="AddODButton" Text="Add OD Details" Clicked="OnAddODDetailsClicked" />
+        <Button x:Name="LoginButton" Text="Login" Clicked="OnLoginClicked" />
+
+        <ListView x:Name="NamelistListView" IsVisible="False" />
+    </StackLayout>
+</ContentPage>

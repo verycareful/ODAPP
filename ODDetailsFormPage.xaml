@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ODapp.ODDetailsFormPage">
+
+    <StackLayout Padding="10">
+        <Label Text="Register Number" />
+        <Entry x:Name="RegisterNumberEntry" Placeholder="Enter Register Number" />
+
+        <Label Text="Date" />
+        <DatePicker x:Name="DatePicker" />
+
+        <Label Text="From" />
+        <Entry x:Name="FromEntry" Placeholder="Enter From Time" Keyboard="Numeric" />
+
+        <Label Text="To" />
+        <Entry x:Name="ToEntry" Placeholder="Enter To Time" Keyboard="Numeric" />
+
+        <Label Text="Reason" />
+        <Entry x:Name="ReasonEntry" Placeholder="Enter Reason" />
+
+        <Button Text="Submit" Clicked="OnSubmitClicked" />
+    </StackLayout>
+</ContentPage>
