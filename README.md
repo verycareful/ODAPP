@@ -1,12 +1,9 @@
-# ODapp - On-Duty Application Management System
+# ODapp - On-Duty Management System
 
-A cross-platform .NET MAUI application for managing On-Duty (OD) requests and tracking student attendance. Built with modern technologies including .NET 9, MAUI, and Supabase for backend services.
+A cross-platform .NET MAUI application for managing On-Duty (OD) requests and tracking student attendance records. Built with .NET 9, MAUI, and Supabase backend services.
 
-![.NET MAUI](https://img.shields.io/badge/.NET%20MAUI-9.0-blue)
-![Supabase](https://img.shields.io/badge/Supabase-Backend-green)
-![Platform](https://img.shields.io/badge/Platform-Windows%20|%20Android%20|%20iOS%20|%20macOS-purple)
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
@@ -21,100 +18,99 @@ A cross-platform .NET MAUI application for managing On-Duty (OD) requests and tr
 - [Contributing](#contributing)
 - [License](#license)
 
-## 🎯 Overview
 
-ODapp is a comprehensive On-Duty management system designed for educational institutions. It allows students to submit OD requests for events, activities, or other authorized absences, while providing administrators with tools to manage and track these requests efficiently.
+## Overview
 
-### Key Benefits
+ODapp is an On-Duty management system designed for educational institutions. Students can submit OD requests for events, activities, or other authorized absences. The application provides a simple interface to manage and track these requests.
 
-- **Cross-Platform**: Runs on Windows, Android, iOS, and macOS from a single codebase
-- **Cloud-Based**: Leverages Supabase for secure, scalable backend services
-- **Real-Time**: Instant updates and synchronization across devices
-- **Secure**: Authentication and authorization built-in
+The application currently targets Windows (net9.0-windows10.0.19041.0) but supports cross-platform deployment to Android, iOS, and macOS through .NET MAUI.
 
-## ✨ Features
 
-### Core Features
+## Features
+
+### Core Functionality
 
 | Feature | Description |
 |---------|-------------|
-| **User Authentication** | Secure login/logout with Supabase Auth |
-| **OD Request Submission** | Students can submit OD details with date range and reason |
-| **Namelist Management** | View and manage student namelists |
-| **OD Details Tracking** | Track and view all OD requests |
-| **Session Persistence** | User sessions are maintained across app restarts |
+| User Authentication | Email/password login with Supabase Auth, session persistence using device preferences |
+| Student Namelist | View student records including Register Number, Name, Admission Year, Department, Course, and Section |
+| OD Request Submission | Submit OD details with Register Number, Date, From/To period, and Reason |
+| OD Details View | Browse all submitted OD records with formatted display |
+| Session Management | Access tokens stored locally for persistent login across app restarts |
 
-### User Workflow
+### Application Pages
 
-1. **Login**: Users authenticate with their email and password
-2. **View Namelist**: Browse the list of registered students
-3. **Submit OD Request**: Fill in OD details including:
-   - Register Number
-   - Date of OD
-   - From/To period range
-   - Reason for OD
-4. **View OD Details**: Track submitted OD requests
+- **MainPage**: Dashboard with navigation buttons for Namelist, OD Details, Add OD, and Login/Logout
+- **LoginPage**: Email and password authentication form
+- **NamelistPage**: Displays student list in a three-column grid layout (Student Info, Admission Info, Course Info)
+- **ODDetailsPage**: Shows OD records with student details, date, time range, and reason
+- **ODDetailsFormPage**: Form for submitting new OD requests (requires authentication)
 
-## 🏗️ Architecture
+
+## Architecture
 
 ### Technology Stack
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    ODapp (.NET MAUI)                        │
-├─────────────────────────────────────────────────────────────┤
-│  UI Layer (XAML)                                            │
-│  ├── MainPage.xaml        - Home/Dashboard                  │
-│  ├── LoginPage.xaml       - User Authentication             │
-│  ├── NamelistPage.xaml    - Student List View               │
-│  ├── ODDetailsPage.xaml   - OD Records View                 │
-│  └── ODDetailsFormPage.xaml - OD Submission Form            │
-├─────────────────────────────────────────────────────────────┤
-│  Service Layer (C#)                                         │
-│  ├── SupabaseService.cs   - Supabase API Integration        │
-│  └── SupabaseAuth.cs      - Authentication Services         │
-├─────────────────────────────────────────────────────────────┤
-│  Infrastructure                                             │
-│  ├── .NET 9.0                                               │
-│  ├── .NET MAUI                                              │
-│  └── Supabase SDK                                           │
-└─────────────────────────────────────────────────────────────┘
-                            │
-                            ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    Supabase Backend                         │
-├─────────────────────────────────────────────────────────────┤
-│  ├── PostgreSQL Database                                    │
-│  ├── Authentication (GoTrue)                                │
-│  └── REST API (PostgREST)                                   │
-└─────────────────────────────────────────────────────────────┘
++-------------------------------------------------------------+
+|                    ODapp (.NET MAUI)                        |
++-------------------------------------------------------------+
+|  UI Layer (XAML + Code-Behind)                              |
+|  - MainPage.xaml/cs        Dashboard and navigation         |
+|  - LoginPage.xaml/cs       User authentication              |
+|  - NamelistPage.xaml/cs    Student list display             |
+|  - ODDetailsPage.xaml/cs   OD records display               |
+|  - ODDetailsFormPage.xaml/cs  OD submission form            |
++-------------------------------------------------------------+
+|  Service Layer                                              |
+|  - ISupabaseService        Service interface                |
+|  - SupabaseService         Supabase API implementation      |
++-------------------------------------------------------------+
+|  Dependencies                                               |
+|  - Microsoft.Maui.Controls                                  |
+|  - Supabase (v1.1.1)                                        |
+|  - Supabase.Gotrue (v6.0.3)                                 |
+|  - Newtonsoft.Json                                          |
+|  - Microsoft.Extensions.Configuration                       |
++-------------------------------------------------------------+
+                            |
+                            v
++-------------------------------------------------------------+
+|                    Supabase Backend                         |
++-------------------------------------------------------------+
+|  - PostgreSQL Database (Namelist, ODDetails tables)         |
+|  - GoTrue Authentication                                    |
+|  - PostgREST API                                            |
++-------------------------------------------------------------+
 ```
 
 ### Design Patterns
 
-- **Dependency Injection**: Services are injected via constructor
-- **MVVM-Inspired**: Data binding between XAML views and code-behind
-- **Interface Segregation**: `ISupabaseService` defines service contracts
+- **Dependency Injection**: Services registered in MauiProgram.cs and injected via constructors
+- **Interface-based Design**: ISupabaseService interface defines the service contract
+- **Shell Navigation**: MAUI Shell used for page routing (MainPage, LoginPage, NamelistPage, ODDetailsPage, ODDetailsFormPage)
 
-## 📦 Prerequisites
+
+## Prerequisites
 
 ### Development Requirements
 
-- **IDE**: Visual Studio 2022 (17.8+) or VS Code with C# DevKit
-- **.NET SDK**: 9.0 or later
-- **.NET MAUI Workload**: Install via Visual Studio Installer or CLI
-- **Windows SDK**: 10.0.19041.0 or later (for Windows target)
+- Visual Studio 2022 (17.8+) or VS Code with C# DevKit
+- .NET SDK 9.0 or later
+- .NET MAUI workload
+- Windows SDK 10.0.19041.0 or later (for Windows target)
 
-### Platform-Specific Requirements
+### Platform Requirements
 
-| Platform | Requirements |
-|----------|-------------|
-| Windows | Windows 10 version 1809 (17763) or later |
-| Android | Android 5.0 (API 21) or later, Android SDK |
-| iOS | macOS with Xcode 15+, iOS 11.0+ |
-| macOS | macOS 11.0 or later |
+| Platform | Minimum Version |
+|----------|-----------------|
+| Windows | Windows 10 version 1809 (build 17763) |
+| Android | Android 5.0 (API 21) |
+| iOS | iOS 11.0, requires macOS with Xcode |
+| macOS | macOS 11.0 (Mac Catalyst) |
 
-## 🚀 Installation
+
+## Installation
 
 ### 1. Clone the Repository
 
@@ -138,16 +134,16 @@ dotnet restore
 ### 4. Build the Application
 
 ```bash
-# For Windows
+# Windows (default target)
 dotnet build -f net9.0-windows10.0.19041.0
 
-# For Android
+# Android
 dotnet build -f net9.0-android
 
-# For iOS (macOS only)
+# iOS (macOS only)
 dotnet build -f net9.0-ios
 
-# For macOS
+# macOS
 dotnet build -f net9.0-maccatalyst
 ```
 
@@ -156,111 +152,98 @@ dotnet build -f net9.0-maccatalyst
 ```bash
 # Windows
 dotnet run -f net9.0-windows10.0.19041.0
-
-# Android (emulator or device)
-dotnet run -f net9.0-android
-
-# iOS Simulator (macOS only)
-dotnet run -f net9.0-ios
 ```
 
-## ⚙️ Configuration
 
-### Supabase Configuration
+## Configuration
 
-The application connects to a Supabase backend. The connection details are configured in `SupabaseService.cs`:
+### Supabase Connection
+
+The Supabase connection is configured in `SupabaseService.cs`:
 
 ```csharp
 private const string SupabaseUrl = "https://your-project.supabase.co";
 private const string SupabaseKey = "your-anon-key";
 ```
 
-### Environment Configuration
+### Session Storage
 
-Create an `appsettings.json` file for environment-specific settings:
-
-```json
-{
-  "Supabase": {
-    "Url": "https://your-project.supabase.co",
-    "Key": "your-anon-key"
-  },
-  "Logging": {
-    "LogLevel": "Information"
-  }
-}
-```
-
-### Secure Credential Storage
-
-For production, use secure storage methods:
+User sessions are persisted using MAUI Preferences:
 
 ```csharp
-// Access token storage
+// Stored on successful login
 Preferences.Set("access_token", session.AccessToken);
 Preferences.Set("refresh_token", session.RefreshToken);
+Preferences.Set("user_email", email);
+
+// Cleared on logout
+Preferences.Remove("access_token");
+Preferences.Remove("refresh_token");
+Preferences.Remove("user_email");
 ```
 
-## 📁 Project Structure
+
+## Project Structure
 
 ```
 ODapp/
-├── 📄 App.xaml                    # Application resources and styles
-├── 📄 App.xaml.cs                 # Application entry point
-├── 📄 AppShell.xaml               # Shell navigation structure
-├── 📄 AppShell.xaml.cs            # Shell code-behind
-├── 📄 MauiProgram.cs              # DI container and service registration
-│
-├── 📄 MainPage.xaml               # Main dashboard view
-├── 📄 MainPage.xaml.cs            # Main page logic
-├── 📄 LoginPage.xaml              # Login form view
-├── 📄 LoginPage.xaml.cs           # Login logic
-├── 📄 NamelistPage.xaml           # Student list view
-├── 📄 NamelistPage.xaml.cs        # Namelist logic
-├── 📄 ODDetailsPage.xaml          # OD records view
-├── 📄 ODDetailsPage.xaml.cs       # OD details logic
-├── 📄 ODDetailsFormPage.xaml      # OD submission form
-├── 📄 ODDetailsFormPage.xaml.cs   # Form submission logic
-│
-├── 📄 SupabaseService.cs          # Supabase API service
-├── 📄 SupabaseAuth.cs             # Authentication utilities
-│
-├── 📄 appsettings.json            # Application configuration
-├── 📄 appxmanifest.xml            # Windows app manifest
-├── 📄 ODapp.csproj                # Project file
-├── 📄 ODapp.sln                   # Solution file
-│
-├── 📁 Platforms/                  # Platform-specific code
-│   ├── 📁 Android/
-│   ├── 📁 iOS/
-│   ├── 📁 MacCatalyst/
-│   ├── 📁 Tizen/
-│   └── 📁 Windows/
-│
-├── 📁 Properties/
-│   └── 📄 launchSettings.json     # Debug launch settings
-│
-└── 📁 Resources/
-    ├── 📁 AppIcon/                # Application icons
-    ├── 📁 Fonts/                  # Custom fonts
-    ├── 📁 Images/                 # Image assets
-    ├── 📁 Raw/                    # Raw assets
-    ├── 📁 Splash/                 # Splash screen assets
-    └── 📁 Styles/                 # XAML style resources
+|-- App.xaml                    Application resources
+|-- App.xaml.cs                 Application entry point
+|-- AppShell.xaml               Shell navigation structure
+|-- AppShell.xaml.cs            Shell code-behind
+|-- MauiProgram.cs              DI container and service registration
+|
+|-- MainPage.xaml               Dashboard UI
+|-- MainPage.xaml.cs            Dashboard logic, Namelist/ODDetails models
+|-- LoginPage.xaml              Login form UI
+|-- LoginPage.xaml.cs           Login logic
+|-- NamelistPage.xaml           Student list UI
+|-- NamelistPage.xaml.cs        Namelist data binding
+|-- ODDetailsPage.xaml          OD records UI
+|-- ODDetailsPage.xaml.cs       OD details data binding
+|-- ODDetailsFormPage.xaml      OD submission form UI
+|-- ODDetailsFormPage.xaml.cs   Form submission logic
+|
+|-- SupabaseService.cs          ISupabaseService implementation
+|-- SupabaseAuth.cs             Authentication utilities
+|
+|-- appsettings.json            Application configuration
+|-- appxmanifest.xml            Windows app manifest
+|-- ODapp.csproj                Project file
+|-- ODapp.sln                   Solution file
+|
+|-- Platforms/
+|   |-- Android/                Android-specific code
+|   |-- iOS/                    iOS-specific code
+|   |-- MacCatalyst/            macOS-specific code
+|   |-- Tizen/                  Tizen-specific code
+|   +-- Windows/                Windows-specific code
+|
+|-- Properties/
+|   +-- launchSettings.json     Debug launch settings
+|
++-- Resources/
+    |-- AppIcon/                Application icons
+    |-- Fonts/                  OpenSans fonts
+    |-- Images/                 Image assets
+    |-- Raw/                    Raw assets
+    |-- Splash/                 Splash screen
+    +-- Styles/                 Colors.xaml, Styles.xaml
 ```
 
-## 📖 Usage
 
-### User Authentication
+## Usage
+
+### Authentication
 
 ```csharp
 // Login
 var session = await _supabaseService.Login(email, password);
 
-// Check login status
+// Check if logged in
 bool isLoggedIn = _supabaseService.IsLoggedIn();
 
-// Get current user
+// Get current user email
 string email = _supabaseService.GetCurrentUserEmail();
 
 // Logout
@@ -270,11 +253,11 @@ await _supabaseService.Logout();
 ### Fetching Data
 
 ```csharp
-// Get namelist
-var namelist = await _supabaseService.GetNamelist();
+// Get student namelist
+ObservableCollection<Namelist> students = await _supabaseService.GetNamelist();
 
 // Get OD details
-var odDetails = await _supabaseService.GetODDetails();
+ObservableCollection<ODDetails> odRecords = await _supabaseService.GetODDetails();
 ```
 
 ### Submitting OD Request
@@ -282,7 +265,7 @@ var odDetails = await _supabaseService.GetODDetails();
 ```csharp
 var odDetail = new ODDetails
 {
-    RegisterNumber = "2021001",
+    RegisterNumber = "RA2211003010001",
     Date = DateTime.Today,
     From = 1,      // Starting period
     To = 4,        // Ending period
@@ -292,17 +275,18 @@ var odDetail = new ODDetails
 bool success = await _supabaseService.SubmitODDetail(odDetail);
 ```
 
-## 🔌 API Reference
+
+## API Reference
 
 ### ISupabaseService Interface
 
-| Method | Returns | Description |
-|--------|---------|-------------|
-| `Login(email, password)` | `Task<Session>` | Authenticate user |
-| `Logout()` | `Task<bool>` | Sign out user |
-| `GetNamelist()` | `Task<ObservableCollection<Namelist>>` | Fetch all students |
+| Method | Return Type | Description |
+|--------|-------------|-------------|
+| `Login(string email, string password)` | `Task<Session>` | Authenticate user with Supabase |
+| `Logout()` | `Task<bool>` | Clear session and sign out |
+| `GetNamelist()` | `Task<ObservableCollection<Namelist>>` | Fetch all student records |
 | `GetODDetails()` | `Task<ObservableCollection<ODDetails>>` | Fetch all OD records |
-| `SubmitODDetail(odDetail)` | `Task<bool>` | Submit new OD request |
+| `SubmitODDetail(ODDetails odDetail)` | `Task<bool>` | Submit new OD request |
 | `IsLoggedIn()` | `bool` | Check authentication status |
 | `GetCurrentUserEmail()` | `string` | Get logged-in user's email |
 
@@ -313,9 +297,23 @@ bool success = await _supabaseService.SubmitODDetail(odDetail);
 ```csharp
 public class Namelist
 {
+    [JsonProperty("REGISTER NUMBER")]
     public string RegisterNumber { get; set; }
+
+    [JsonProperty("Name")]
     public string Name { get; set; }
-    // Additional properties...
+
+    [JsonProperty("Admission Year")]
+    public int AdmissionYear { get; set; }
+
+    [JsonProperty("Department")]
+    public string Department { get; set; }
+
+    [JsonProperty("Course")]
+    public string Course { get; set; }
+
+    [JsonProperty("Section")]
+    public string Section { get; set; }
 }
 ```
 
@@ -324,95 +322,98 @@ public class Namelist
 ```csharp
 public class ODDetails
 {
+    [JsonProperty("ID")]
+    public long ID { get; set; }
+
+    [JsonProperty("REGISTER NUMBER")]
     public string RegisterNumber { get; set; }
+
+    [JsonProperty("DATE")]
     public DateTime Date { get; set; }
+
+    [JsonProperty("FROM")]
     public short From { get; set; }
+
+    [JsonProperty("TO")]
     public short To { get; set; }
+
+    [JsonProperty("Reason")]
     public string Reason { get; set; }
 }
 ```
 
-## 🗄️ Database Schema
+
+## Database Schema
 
 ### Supabase Tables
 
-#### `Namelist` Table
+#### Namelist Table
 
 | Column | Type | Description |
 |--------|------|-------------|
-| `RegisterNumber` | TEXT | Primary key, student ID |
-| `Name` | TEXT | Student name |
+| REGISTER NUMBER | TEXT | Primary key, student registration number |
+| Name | TEXT | Student full name |
+| Admission Year | INTEGER | Year of admission |
+| Department | TEXT | Department name |
+| Course | TEXT | Course name |
+| Section | TEXT | Section identifier |
 
-#### `ODDetails` Table
+#### ODDetails Table
 
 | Column | Type | Description |
 |--------|------|-------------|
-| `id` | UUID | Primary key, auto-generated |
-| `RegisterNumber` | TEXT | Foreign key to Namelist |
-| `Date` | DATE | Date of OD |
-| `From` | SMALLINT | Starting period (1-8) |
-| `To` | SMALLINT | Ending period (1-8) |
-| `Reason` | TEXT | Reason for OD |
-| `created_at` | TIMESTAMP | Auto-generated timestamp |
+| ID | BIGINT | Primary key, auto-generated |
+| REGISTER NUMBER | TEXT | Student registration number |
+| DATE | DATE | Date of OD |
+| FROM | SMALLINT | Starting period number |
+| TO | SMALLINT | Ending period number |
+| Reason | TEXT | Reason for OD request |
 
-## 🤝 Contributing
 
-We welcome contributions! Please follow these steps:
+## Contributing
 
 ### Getting Started
 
-1. **Fork** the repository
-2. **Clone** your fork:
+1. Fork the repository
+2. Clone your fork:
    ```bash
    git clone https://github.com/your-username/ODAPP.git
    ```
-3. **Create** a feature branch:
+3. Create a feature branch:
    ```bash
    git checkout -b feature/your-feature-name
    ```
-4. **Make** your changes
-5. **Commit** with clear messages:
+4. Make your changes
+5. Commit with clear messages:
    ```bash
    git commit -m "feat: add new feature description"
    ```
-6. **Push** to your fork:
+6. Push to your fork:
    ```bash
    git push origin feature/your-feature-name
    ```
-7. **Open** a Pull Request
+7. Open a Pull Request
 
 ### Commit Message Convention
 
-Follow conventional commits:
 - `feat:` New feature
 - `fix:` Bug fix
 - `docs:` Documentation changes
-- `style:` Code style changes
+- `style:` Code formatting
 - `refactor:` Code refactoring
 - `test:` Adding tests
 - `chore:` Maintenance tasks
 
-### Code Style
 
-- Follow C# coding conventions
-- Use meaningful variable and method names
-- Add XML documentation for public APIs
-- Keep methods focused and concise
-
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
----
 
-## 📞 Support
+## Support
 
-If you encounter any issues or have questions:
+For issues or questions:
 
-1. Check the [Issues](https://github.com/verycareful/ODAPP/issues) page
+1. Check existing [Issues](https://github.com/verycareful/ODAPP/issues)
 2. Create a new issue with detailed information
 3. Include steps to reproduce any bugs
-
----
-
-**Made with ❤️ using .NET MAUI**
