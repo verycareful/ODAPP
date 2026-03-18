@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap2="http://schemas.microsoft.com/appx/manifest/uap/windows10/2" xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3" xmlns:uap4="http://schemas.microsoft.com/appx/manifest/uap/windows10/4" xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5" xmlns:iot="http://schemas.microsoft.com/appx/manifest/iot/windows10" xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10" xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10">
-  <Identity Name="SRMODAPP" Publisher="CN=DCSE-SRMVDP" Version="1.0.0.0" />
+  <Identity Name="ODApp" Publisher="CN=ODApp" Version="1.0.0.0" />
   <Properties>
     <DisplayName>ODApp</DisplayName>
-    <PublisherDisplayName>DCSE-SRMVDP</PublisherDisplayName>
-    <Logo>SRMLOGO.png</Logo>
+    <PublisherDisplayName>ODApp</PublisherDisplayName>
+    <Logo>Assets\AppIcon\appicon.png</Logo>
   </Properties>
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />

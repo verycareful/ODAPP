@@ -2,6 +2,8 @@
 
 A cross-platform .NET MAUI application for managing On-Duty (OD) requests and tracking student attendance records. Built with .NET 9, MAUI, and Supabase backend services.
 
+> **Note**: This project was not pursued further due to lack of proper institutional support. The repository is now public to share the work and allow the community to benefit from it.
+
 
 ## Table of Contents
 
