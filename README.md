@@ -1,5 +1,9 @@
-# ODapp - On-Duty Management System
-
+﻿# ODapp - On-Duty Management System
+[![C#](https://img.shields.io/badge/C%23-12.0-239120?style=flat-square&logo=csharp&logoColor=white)](https://docs.microsoft.com/en-us/dotnet/csharp/)
+[![.NET MAUI](https://img.shields.io/badge/.NET%20MAUI-9.0-512BD4?style=flat-square&logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/apps/maui)
+[![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=flat-square&logo=supabase&logoColor=white)](https://supabase.com/)
+[![License: Polyform NC](https://img.shields.io/badge/License-Polyform%20NC%201.0.0-blue.svg)](https://polyformproject.org/licenses/noncommercial/1.0.0/)
+[![Status: Active](https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square)](.)
 A cross-platform .NET MAUI application for managing On-Duty (OD) requests and tracking student attendance records. Built with .NET 9, MAUI, and Supabase backend services.
 
 > **Note**: This project was not pursued further due to lack of proper institutional support. The repository is now public to share the work and allow the community to benefit from it.
@@ -409,9 +413,16 @@ public class ODDetails
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Copyright © 2026 Sricharan Suresh (github.com/verycareful)
 
+This project is licensed under the **[Polyform Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/)**.
+You may use, copy, and modify this software for non-commercial purposes only.
+Commercial use of any kind is prohibited without explicit written permission from the author.
 
+See the [LICENSE](LICENSE) file for the full license text, or visit
+[https://polyformproject.org/licenses/noncommercial/1.0.0/](https://polyformproject.org/licenses/noncommercial/1.0.0/).
+
+For commercial licensing inquiries, contact [sricharanc03@gmail.com](mailto:sricharanc03@gmail.com).
 ## Support
 
 For issues or questions:
@@ -419,3 +430,4 @@ For issues or questions:
 1. Check existing [Issues](https://github.com/verycareful/ODAPP/issues)
 2. Create a new issue with detailed information
 3. Include steps to reproduce any bugs
+
